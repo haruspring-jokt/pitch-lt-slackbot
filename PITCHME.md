@@ -141,11 +141,11 @@ Lambda内で実装する
 
 ---
 
-- channel_left |
+- channel_left
 - menber_joined_channel |
 - pin_added |
 - subteam_created |
-- and more :smile: |
+- and more! |
 
 ---
 
@@ -159,7 +159,7 @@ Lambda内で実装する
 
 ### example
 
-- チャンネルに加入した場合に固定メッセージを表示する |
+- チャンネルに加入した場合に固定メッセージを表示する
 - ファイルの場所などを検索する |
 − 他ツールと連携し通知を投稿する |
 
