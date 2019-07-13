@@ -14,9 +14,9 @@
 
 ---
 
-![Slack Botの種類と大まかな作り方 - Qiita](https://i.imgur.com/Dr98jHg.jpg)
+![Slack Botの種類と大まかな作り方 - Qiita](https://i.imgur.com/i0C9Gcx.jpg)
 
-*https://qiita.com/namutaka/items/233a83100c94af033575*
+*[Slack Botの種類と大まかな作り方 - Qiita](https://qiita.com/namutaka/items/233a83100c94af033575)*
 
 ---
 
@@ -28,13 +28,13 @@ Botユーザーと会話する形式
 
 ---
 
-メンション（`@bot_name`）やチャンネル内の特定の投稿に応じて処理が開始される
+チャンネル内の特定の投稿に応じて処理が開始される
 
 ![](https://i.imgur.com/d2tFzSz.jpg)
 
 ---
 
-Pythonでは[Slackbot](https://github.com/lins05/slackbot)というライブラリがあるので発火条件を簡単に書ける
+Pythonでは[Slackbot](https://github.com/lins05/slackbot)というライブラリで発火条件を簡単に書ける
 
 ```python
 @listen_to(r'^htb$')
@@ -71,15 +71,17 @@ def post_htb_hotentry(message, *args):
 
 ### Event API
 
-> Events API は、イベント情報のサブスクリプションを使用して JSON ペイロードをサーバーに送信します。サーバーではペイロードの受信を行い、どのように応答するか (独自の API、Slack の API、その他の API のどれを呼び出すか) を決めます。Slack アプリの設定ページから、チームとボットユーザーのイベントをサブスクライブできます。
-
 *[必要な Slack API はどれ？ - Slack アプリの作成のためのヒント](https://api.slack.com/lang/ja-jp/which-api)*
 
 ---
 
-![](https://i.imgur.com/0Gk9v2V.jpg)
+> Events API は、イベント情報のサブスクリプションを使用して JSON ペイロードをサーバーに送信します。サーバーではペイロードの受信を行い、どのように応答するか (独自の API、Slack の API、その他の API のどれを呼び出すか) を決めます。Slack アプリの設定ページから、チームとボットユーザーのイベントをサブスクライブできます。
 
-AWS Lambdaと組み合わせるのでサーバーの設定は不要、コードの実装に集中できる
+---
+
+![](https://i.imgur.com/ZBYelfr.jpg)
+
+Lambdaと組み合わせるのでサーバーの設定は不要、実装に集中できる
 
 ---
 
@@ -130,3 +132,37 @@ Lambda内で実装する
 ![](https://i.imgur.com/odPlyoj.jpg)
 
 ---
+
+#### 他に何ができる？
+
+読めるイベントの一覧
+
+*[Event Types for the Events API | Slack](https://api.slack.com/events/api)*
+
+---
+
+- channel_left |
+- menber_joined_channel |
+- pin_added |
+- subteam_created |
+- and more :smile: |
+
+---
+
+## 今後の開発方針
+
+---
+
+要望や不便なことがあればBotで解決できるか検討します
+
+---
+
+### example
+
+- チャンネルに加入した場合に固定メッセージを表示する |
+- ファイルの場所などを検索する |
+− 他ツールと連携し通知を投稿する |
+
+---
+
+ガンガン自動化していきましょう :rocket:
