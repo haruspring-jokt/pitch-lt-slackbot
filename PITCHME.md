@@ -12,6 +12,8 @@
 
 ## Slack Botの種類
 
+---
+
 ![Slack Botの種類と大まかな作り方 - Qiita](https://i.imgur.com/Dr98jHg.jpg)
 
 *https://qiita.com/namutaka/items/233a83100c94af033575*
@@ -53,7 +55,7 @@ def post_htb_hotentry(message, *args):
 
 ---
 
-### 個人用に作ったRTM Slack Botの構成
+#### 個人用に作ったRTM Slack Botの構成
 
 ![](https://i.imgur.com/Mt9fjRs.jpg)
 
@@ -63,4 +65,68 @@ def post_htb_hotentry(message, *args):
 
 ---
 
+## 今回導入したBotの仕様
 
+---
+
+### Event API
+
+> Events API は、イベント情報のサブスクリプションを使用して JSON ペイロードをサーバーに送信します。サーバーではペイロードの受信を行い、どのように応答するか (独自の API、Slack の API、その他の API のどれを呼び出すか) を決めます。Slack アプリの設定ページから、チームとボットユーザーのイベントをサブスクライブできます。
+
+*[必要な Slack API はどれ？ - Slack アプリの作成のためのヒント](https://api.slack.com/lang/ja-jp/which-api)*
+
+---
+
+![](https://i.imgur.com/0Gk9v2V.jpg)
+
+AWS Lambdaと組み合わせるのでサーバーの設定は不要、コードの実装に集中できる
+
+---
+
+#### 実装方法
+
+詳しくは[ブログ参照](https://m4usta13ng.hatenablog.com/entry/2019/07/05/204258)、以下ざっくり説明
+
+---
+
+検知したいワークスペース内のイベントを選択する
+
+![](https://i.imgur.com/UX6H1bW.jpg)
+
+---
+
+検知したイベントの送信先（API Gateway）を指定する
+
+![](https://i.imgur.com/hzYg3NE.jpg)
+
+---
+
+Lambda内で実装する
+
+![](https://i.imgur.com/HnHDCOn.jpg)
+
+---
+
+イベントに応じたJSONが来るので、それに応じて処理を実行
+
+```python
+    if is_channel_created_event(slack_event):
+        post_channel_created(slack_event)
+```
+
+---
+
+```python
+    # Slackにメッセージを投稿する
+    post_message_to_slack_channel(
+        f"新しいチャンネルが作成されました: #{channel_name}",
+        os.environ["DIST_CHANNEL_CH_CREATED"])
+```
+
+---
+
+![](https://i.imgur.com/mMIcRu3.jpg)
+
+![](https://i.imgur.com/odPlyoj.jpg)
+
+---
